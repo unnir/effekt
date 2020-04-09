@@ -45,6 +45,16 @@
                     "default": "/Users/jonathan/Desktop/github/effekt/target/scala-0.21/effekt.jar",
                     "description": "Path to the effekt compiler jar (you need to restart vscode after changing this setting)."
                 },
+                "effekt.startscript": {
+                    "type": "string",
+                    "default": "C:\\Users\\timne\\source\\repos\\effekt\\effekt\\bin",
+                    "description": "Path to the \"effekt\"-bash script folder."
+                },
+                "effekt.shell": {
+                    "type": "string",
+                    "default": "C:\\Program Files\\Git\\bin\\bash.exe",
+                    "description": "Path to the preferred shell binary."
+                },
                 "effekt.showExplanations": {
                     "type": "boolean",
                     "default": true,
@@ -77,7 +87,12 @@
                 "category": "Effekt",
                 "command": "effekt.selectLinkedEditors",
                 "title": "Focus Product Editors"
-            }
+            }, 
+            { 
+                "category": "Effekt",
+				"command": "effekt.Terminal",
+				"title": "Effekt Terminal: Create a Terminal with Effekt environment"
+			}
         ],
         "keybindings": [
             {

@@ -1,6 +1,6 @@
 'use strict';
 
-import { ExtensionContext, workspace } from 'vscode';
+import { ExtensionContext, workspace, commands, TerminalOptions, window } from 'vscode';
 import { LanguageClient, LanguageClientOptions, ServerOptions } from 'vscode-languageclient';
 import { Monto } from './monto';
 
@@ -52,6 +52,22 @@ export function activate(context: ExtensionContext) {
     Monto.setup("effekt", context, client);
 
     context.subscriptions.push(client.start());
+
+    window.onDidOpenTerminal(terminal => {
+		console.log("Terminal opened. Total count: " + (<any>window).terminals.length);
+	});
+
+    // create an Effekt-specific shell
+    context.subscriptions.push(commands.registerCommand('effekt.Terminal', () => {
+        let startScript = config.get<string>("startscript") || ""
+        let pathToShell = config.get<string>("shell") || ""
+        let workspacePath = "${workspaceFolder}";
+		let pathVar = "${env:Path}";
+		pathVar = pathVar + ";" + startScript;
+		let options: TerminalOptions = {env: { ["Path"] : pathVar}, name: "effekt Shell", shellPath: pathToShell, cwd: workspacePath };
+		window.createTerminal(options).show();
+		window.showInformationMessage('Effekt-Terminal created.');
+	}));
 }
 
 export function deactivate(): Thenable<void> | undefined {
