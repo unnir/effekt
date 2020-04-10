@@ -61,12 +61,31 @@ export function activate(context: ExtensionContext) {
     context.subscriptions.push(commands.registerCommand('effekt.Terminal', () => {
         let startScript = config.get<string>("startscript") || ""
         let pathToShell = config.get<string>("shell") || ""
+        
         let workspacePath = "${workspaceFolder}";
 		let pathVar = "${env:Path}";
-		pathVar = pathVar + ";" + startScript;
-		let options: TerminalOptions = {env: { ["Path"] : pathVar}, name: "effekt Shell", shellPath: pathToShell, cwd: workspacePath };
-		window.createTerminal(options).show();
-		window.showInformationMessage('Effekt-Terminal created.');
+        let options: TerminalOptions;
+        
+        if(pathToShell==""){
+            window.showInformationMessage('Path to shell binary not set! Using system default...');
+        }
+
+        if(startScript==""){
+            window.showInformationMessage('Path to "effekt"-script not set!');
+        }else{
+            pathVar = pathVar + ";" + startScript;
+        }
+        options = {env: { ["Path"] : pathVar}, name: "effekt Shell", cwd: workspacePath || "${execPath}", shellPath: pathToShell || "" };
+
+        let effektTerminal = window.createTerminal(options);
+        if (effektTerminal) {
+            effektTerminal.show();
+            window.showInformationMessage('Effekt-Terminal created.');   
+        }
+        else {
+            window.showInformationMessage('Failed to create Effekt-Terminal.');
+        }
+		
 	}));
 }
 
