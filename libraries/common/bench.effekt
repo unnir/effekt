@@ -12,6 +12,7 @@ extern io def timestamp(): Int =
   js "Date.now() * 1000000"
   chez "(timestamp)"
   ml "IntInf.toInt (Time.toNanoseconds (Time.now ()))"
+  jit "currentTimeNanos(): Int"
 
 /**
  * High-precision timestamp in nanoseconds that should be for measurements.
