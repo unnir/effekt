@@ -1,3 +1,5 @@
+import string
+import process
 import bench
 
 interface Formatted {
@@ -154,3 +156,10 @@ def suite(name: String, printTimes: Bool) { body: => Unit / { Test, Formatted } 
 
 def suite(name: String) { body: => Unit / { Test, Formatted } }: Bool / {} =
   suite(name, true) { body }
+
+/// Use as `def main() = mainSuite("...") { ... }`
+def mainSuite(name: String) { body: => Unit / { Test, Formatted } }: Unit = {
+  val result = suite(name, true) { body }
+  val exitCode = if (result) 0 else 1
+  exit(exitCode)
+}
