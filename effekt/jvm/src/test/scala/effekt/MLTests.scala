@@ -104,5 +104,8 @@ class MLTests extends EffektTests {
     examplesDir / "pos" / "probabilistic.effekt",
 
     examplesDir / "pos" / "genericcompare.effekt", // genericCompare is only implemented for JS
+
+    // bitshifts are not implemented on the MLton backend
+    examplesDir / "pos" / "bitshifts.effekt",
   )
 }
