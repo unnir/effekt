@@ -21,7 +21,8 @@ abstract class StdlibChezTests extends StdlibTests {
   override def ignored: List[File] = List(
     // Not implemented yet
     examplesDir / "stdlib" / "bytes",
-    examplesDir / "stdlib" / "io"
+    examplesDir / "stdlib" / "io",
+    examplesDir / "stdlib" / "map"
   )
 }
 class StdlibChezSchemeMonadicTests extends StdlibChezTests {
@@ -47,7 +48,8 @@ class StdlibMLTests extends StdlibTests {
 
     // Not implemented yet
     examplesDir / "stdlib" / "bytes",
-    examplesDir / "stdlib" / "io"
+    examplesDir / "stdlib" / "io",
+    examplesDir / "stdlib" / "map"
   )
 }
 class StdlibLLVMTests extends StdlibTests {
@@ -76,5 +78,8 @@ class StdlibLLVMTests extends StdlibTests {
     examplesDir / "stdlib" / "list" / "build.effekt",
     examplesDir / "stdlib" / "string" / "strings.effekt",
     examplesDir / "stdlib" / "string" / "unicode.effekt",
+
+    // Not implemented yet
+    examplesDir / "stdlib" / "map"
   )
 }
